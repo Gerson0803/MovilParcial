@@ -7,33 +7,71 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
+      child: Column(
+        children: [
           DrawerHeader(
-            child: Text('Menú de conversores', style: TextStyle(color: Colors.white, fontSize: 24)),
-            decoration: BoxDecoration(color: Colors.blue),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.deepPurple, Colors.deepPurpleAccent],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+            child: Align(
+              alignment: Alignment.bottomLeft,
+              child: Text(
+                '🌐 Conversores',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ),
-          ListTile(
-            title: Text('Celsius ↔ Rankine'),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => CelsiusRankineScreen()));
-            },
-          ),
-          ListTile(
-            title: Text('Años luz ↔ UA'),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => LightYearsAUScreen()));
-            },
-          ),
-          ListTile(
-            title: Text('Velocidad: km/h ↔ m/s'),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => VelocidadScreen()));
-            },
+          Expanded(
+            child: ListView(
+              padding: EdgeInsets.symmetric(vertical: 8),
+              children: [
+                _buildDrawerItem(
+                  context,
+                  icon: Icons.thermostat_outlined,
+                  title: 'Celsius ↔ Rankine',
+                  destination: CelsiusRankineScreen(),
+                ),
+                Divider(),
+                _buildDrawerItem(
+                  context,
+                  icon: Icons.travel_explore,
+                  title: 'Años luz ↔ UA',
+                  destination: LightYearsAUScreen(),
+                ),
+                Divider(),
+                _buildDrawerItem(
+                  context,
+                  icon: Icons.speed,
+                  title: 'Velocidad: km/h ↔ m/s',
+                  destination: VelocidadScreen(),
+                ),
+              ],
+            ),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildDrawerItem(BuildContext context,
+      {required IconData icon, required String title, required Widget destination}) {
+    return ListTile(
+      leading: Icon(icon, color: Colors.deepPurple),
+      title: Text(
+        title,
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+      ),
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => destination));
+      },
     );
   }
 }
