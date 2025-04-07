@@ -1,0 +1,19 @@
+name: conversores_flutter
+description: A simple app for converting Celsius/Rankine, Light years/AU, and km/h to m/s.
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
